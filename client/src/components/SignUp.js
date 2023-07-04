@@ -1,11 +1,31 @@
 import React,{useState} from "react";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
+
 
 const SignUp = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [emailId, setEmailId] = useState("");
-  const handleSubmit = () => {
-    console.log(username, password,emailId);
+  const navigate = useNavigate();
+  const handleSubmit = async () => {
+    const user={
+      username,
+      email:emailId,
+      password,
+    }
+    const res= await fetch('http://localhost:8000/api/v1/signup', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(user),
+    });
+    const resJson= await res.json();
+    toast.error(resJson?.msg);
+    if(resJson?.success==='true'){
+       navigate('/login');
+    }
   };
   return (
     <div className="flex flex-col  box-border w-full  pl-40 pr-20">

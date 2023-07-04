@@ -4,7 +4,8 @@ const { generateFile } = require("./generatefile");
 const { executeCpp } = require("./executeCpp");
 const apiRoutes =require("./routes/index");
 const mongoose =require("mongoose");
-const {connectToMongoDB} =require("./connect")
+const {connectToMongoDB,PORT} =require("./connect");
+const cors=require('cors');
 
 connectToMongoDB('mongodb://127.0.0.1:27017/onlineJudge').then(()=>{
   console.log("mongodb connected");
@@ -12,6 +13,10 @@ connectToMongoDB('mongodb://127.0.0.1:27017/onlineJudge').then(()=>{
 
 //middlewares
 app.use(express.json());
+app.use(cors({
+  origin:"http://localhost:1234",
+  methods:['GET',"POST"],
+}));
 app.use(express.urlencoded({ extended: true }));
 
 // routes
@@ -94,6 +99,6 @@ app.use("/api",apiRoutes);
 //   }
 // });
 
-app.listen(8000, () => {
+app.listen(PORT, () => {
   console.log("server started on port 8000");
 });

@@ -1,10 +1,32 @@
 import React, { useState } from "react";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
+import Cookies from 'js-cookie';
 
 const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const handleSubmit = () => {
-    console.log(username, password);
+  const navigate = useNavigate();
+
+  const handleSubmit = async() => {
+   const user ={
+    username,
+    password
+   };
+   const res= await fetch('http://localhost:8000/api/v1/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(user),
+    });
+    const jsonRes=await res.json();
+    toast.error(jsonRes?.msg);
+    if(jsonRes.success==='true'){
+      Cookies.set('uid', jsonRes?.jwt);
+      navigate('/');
+    }
+    
   };
   return (
     <div className="flex flex-col  box-border w-full  pl-40 pr-20">
