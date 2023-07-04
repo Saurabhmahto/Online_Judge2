@@ -5,19 +5,19 @@ async function handleUserSignup(req, res) {
   const { username, email, password } = req.body;
   if (!username) {
     return res.status(400).json({
-      success: "false",
+      status: "error",
       msg: "username required",
     });
   }
   if (!email) {
     return res.status(400).json({
-      success: "false",
+      status: "error",
       msg: "email id required",
     });
   }
   if (!password) {
     return res.status(400).json({
-      success: "false",
+      status: "error",
       msg: "password required",
     });
   }
@@ -31,21 +31,19 @@ async function handleUserSignup(req, res) {
       password: hashPassword,
     });
     return res.status(200).json({
-      success: "true",
-      result: user,
+      status: "ok",
+      result: true,
     });
   } catch (error) {
     if (error.code === 11000) {
       return res.status(400).json({
-        success: "false",
+        status: "error",
         msg: "username or email already exits",
-        result: error,
       });
     }
     return res.status(400).json({
-      success: "false",
+      status: "error",
       msg: "user not created ",
-      result: error,
     });
   }
 }
@@ -53,13 +51,13 @@ async function handleUserLogin(req, res) {
   const { username, password } = req.body;
   if (!username) {
     return res.status(400).json({
-      success: "false",
+      status: "error",
       msg: "username required",
     });
   }
   if (!password) {
     return res.status(400).json({
-      success: "false",
+      status : "error",
       msg: "password required",
     });
   }
@@ -68,7 +66,7 @@ async function handleUserLogin(req, res) {
 
     if (!isPresent) {
       return res.status(400).json({
-        success: "false",
+        status: "error",
         msg: "user not registerd",
       });
     } else {
@@ -77,15 +75,14 @@ async function handleUserLogin(req, res) {
       
       if (!user) {
         return res.status(400).json({
-          success: "false",
-          msg: "password in correct",
+          status: "error",
+          msg: "password incorrect",
         });
       }
       const token =setUser(isPresent);
-      res.setHeader('Set-Cookie', 'myCookie=cookieValue; SameSite=None; Secure');
       return res.status(200).json({
-        success: "true",
-        jwt:token
+        status: "true",
+        jwt:token,
       });
     }
     

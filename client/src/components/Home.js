@@ -1,9 +1,26 @@
-import React from 'react';
+import React, { useContext, useEffect } from 'react';
 import questionIcon from '../asset/img/question.svg'
+import jwtDecode from 'jwt-decode';
+import Cookies from 'js-cookie';
+import { useNavigate } from "react-router-dom";
+import userContext from '../services/userContext';
+
 
 const problemsName=['Weird Algorithm','Missing Number','Repetitions','Increasing Array','Permutations','Number Spiral','Two Knights','Two Sets','Bit Strings','Trailing Zeros','Coin Piles','Palindrome Reorder','Gray Code','Weird Algorithm','Missing Number','Repetitions','Increasing Array','Permutations','Number Spiral','Two Knights','Two Sets','Bit Strings','Trailing Zeros','Coin Piles','Palindrome Reorder','Gray Code'];
 
 const Home = () => {
+  // const navigate = useNavigate();
+
+  // useEffect( () => {
+  //   const jwtToken = Cookies.get('uid');
+  //   try {
+  //     const decodedToken = jwtDecode(jwtToken);
+  //     navigate('/');
+  //   } catch (error) {
+  //     navigate('/login');
+  //   }
+  // },[])
+
   return (
     <div className='flex flex-col pl-52 pr-44 '>
       <div className='font-sans text-3xl font-bold tracking-wider py-4 border-b border-black'><h1>Problem Set</h1></div>

@@ -14,7 +14,17 @@ const userSchema =new mongoose.Schema({
     password:{
         type:String,
         required:true,
-    }
+    },
+    problems:{
+        type:[{
+            name:{
+                type:String
+            },
+            description:{
+                type:String,
+            }
+        }]
+    },
 },{
     timestamps:true
 });

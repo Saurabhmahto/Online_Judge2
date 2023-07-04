@@ -14,7 +14,7 @@ const SignUp = () => {
       email:emailId,
       password,
     }
-    const res= await fetch('http://localhost:8000/api/v1/signup', {
+    const res= await fetch('http://localhost:8000/api/v1/user/signup', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -22,9 +22,11 @@ const SignUp = () => {
       body: JSON.stringify(user),
     });
     const resJson= await res.json();
-    toast.error(resJson?.msg);
-    if(resJson?.success==='true'){
-       navigate('/login');
+    if(resJson?.status==='error'){
+      toast.error(resJson?.msg);
+    }
+    else{
+      navigate('/login');
     }
   };
   return (

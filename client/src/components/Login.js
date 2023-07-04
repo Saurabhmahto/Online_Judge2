@@ -1,19 +1,23 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import Cookies from 'js-cookie';
+import userContext from "../services/userContext";
+import jwtDecode from 'jwt-decode';
+
 
 const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
+  const {userName,setUserName} =useContext(userContext);
 
   const handleSubmit = async() => {
    const user ={
     username,
     password
    };
-   const res= await fetch('http://localhost:8000/api/v1/login', {
+   const res= await fetch('http://localhost:8000/api/v1/user/login', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -21,12 +25,19 @@ const Login = () => {
       body: JSON.stringify(user),
     });
     const jsonRes=await res.json();
-    toast.error(jsonRes?.msg);
-    if(jsonRes.success==='true'){
-      Cookies.set('uid', jsonRes?.jwt);
-      navigate('/');
+    if(jsonRes?.status==='error'){
+      toast.error(jsonRes?.msg);
     }
-    
+    else{
+      Cookies.set('uid', jsonRes?.jwt);
+      try {
+        const user = jwtDecode(jsonRes?.jwt);
+        setUserName(user?.username);
+        navigate('/');
+      } catch (error) {
+        navigate('/login');
+      }
+    }
   };
   return (
     <div className="flex flex-col  box-border w-full  pl-40 pr-20">

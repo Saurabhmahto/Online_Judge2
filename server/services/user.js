@@ -1,8 +1,10 @@
 const jwt =require('jsonwebtoken');
 const JWT_SECRET_KEY='$#saurabhmahto28102002';
 function setUser(user){
+    const {username,email}=user;
     const payload ={
-        ...user,
+        username,
+        email,
     };
     return jwt.sign(payload,JWT_SECRET_KEY);
 }
