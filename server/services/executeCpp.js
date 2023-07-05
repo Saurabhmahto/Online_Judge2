@@ -11,9 +11,9 @@ if (!fs.existsSync(outputPath)) {
 
 const executeCpp = (filePath) => {
 const jobID=path.basename(filePath).split('.')[0];
-const outPath =path.join(outputPath,`${jobID}.exe`).replace(/ /g, '\\ ');
-const outputPath1=outputPath.replace(/ /g, '\\ ');
-filePath=filePath.replace(/ /g, '\\ ');
+const outPath =path.join(outputPath,`${jobID}.exe`).replace(/ /g, '\\');
+const outputPath1=outputPath.replace(/ /g, '\\');
+filePath=filePath.replace(/ /g, '\\');
 return new Promise((resolve,reject)=>{
     exec(`g++ ${filePath} -o ${outPath} && cd ${outputPath1} &&  .//${jobID}.exe`,(error,stdout,stderr)=>{
         if(error){

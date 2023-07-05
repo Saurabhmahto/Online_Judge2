@@ -1,7 +1,7 @@
 const express = require("express");
 const app = express();
-const { generateFile } = require("./generatefile");
-const { executeCpp } = require("./executeCpp");
+const { generateFile } = require("./services/generatefile");
+const { executeCpp } = require("./services/executeCpp");
 const apiRoutes =require("./routes/index");
 const mongoose =require("mongoose");
 const {connectToMongoDB,PORT} =require("./connect");
