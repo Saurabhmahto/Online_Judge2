@@ -72,12 +72,6 @@ app.use("/api",apiRoutes);
 
 
 
-// app.get("/", (req, res) => {
-//   return res.json({
-//     online: "compiler",
-//   });
-// });
-
 
 // app.post("/run", async (req, res) => {
 //   const language = req.body.language;

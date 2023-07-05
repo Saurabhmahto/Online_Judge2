@@ -6,6 +6,8 @@ import Home from "./src/components/Home";
 import SignUp from "./src/components/SignUp";
 import Login from "./src/components/Login";
 import Task from "./src/components/Task";
+import Problem from "./src/components/Problem";
+
 
 const appRouter = createBrowserRouter([
   {
@@ -16,6 +18,7 @@ const appRouter = createBrowserRouter([
       { path: "/signup", element: <SignUp /> },
       { path: "/login", element: <Login /> },
       {path:"/add-problem",element:<Task/>},
+      {path:"/problem/:id",element:<Problem/>}
     ],
   },
 ]);

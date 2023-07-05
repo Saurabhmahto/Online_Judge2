@@ -15,16 +15,11 @@ const userSchema =new mongoose.Schema({
         type:String,
         required:true,
     },
-    problems:{
-        type:[{
-            name:{
-                type:String
-            },
-            description:{
-                type:String,
-            }
-        }]
-    },
+    problems: [{
+        questionId:String,
+        name: String,
+        description: String
+      }],
 },{
     timestamps:true
 });

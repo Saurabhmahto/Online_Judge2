@@ -1,9 +1,12 @@
 import React, { useState } from "react";
+import Cookies from "js-cookie";
+import { toast } from "react-toastify";
 
 
 
 const task = () => {
   const [problemName,setProblemName]=useState('');
+  const jwtToken = Cookies.get("uid");
   const handleProblemName = async()=>{
     const name ={
       name:problemName.toLowerCase().replace(/\s/g, '-')
@@ -12,11 +15,17 @@ const task = () => {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
+        'x-access-token':jwtToken,
       },
       body: JSON.stringify(name),
     });
     const data =await res.json();
-    console.log(data);
+    if(data.status==='error'){
+      toast.error(data?.msg);
+    }
+    else{
+      toast.info(data?.msg);
+    }
   }
 
   return (

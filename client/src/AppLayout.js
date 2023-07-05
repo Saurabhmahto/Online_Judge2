@@ -7,8 +7,10 @@ import userContext from "./services/userContext";
 
 const AppLayout = () => {
   const [userName,setUserName] =useState('');
+  const [userProblemSet,setUserProblem] =useState([]);
+
   return (
-    <userContext.Provider value={{userName,setUserName}}>
+    <userContext.Provider value={{userName,setUserName,userProblemSet,setUserProblem}}>
       <Header/>
       <Outlet/>
       <ToastContainer
