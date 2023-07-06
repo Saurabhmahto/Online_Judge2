@@ -6,5 +6,8 @@ async function connectToMongoDB(url) {
 }
 module.exports={
     connectToMongoDB,
-    PORT:process.env.PORT
+    PORT:process.env.PORT,
+    MONGO_URL:process.env.MONGO_URL,
+    CLIENT_URL:process.env.CLIENT_URL,
+    
 }

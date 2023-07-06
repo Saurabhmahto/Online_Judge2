@@ -24,7 +24,6 @@ async function handleUserSignup(req, res) {
   try {
     const salt = await bcrypt.genSalt(8);
     const hashPassword = await bcrypt.hash(password, salt);
-    console.log(hashPassword);
     const user = await User.create({
       username,
       email,
@@ -87,7 +86,7 @@ async function handleUserLogin(req, res) {
     }
     
   } catch (error) {
-    console.log(error);
+  
   }
 }
 module.exports = {

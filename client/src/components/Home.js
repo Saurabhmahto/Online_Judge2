@@ -4,6 +4,7 @@ import jwtDecode from "jwt-decode";
 import Cookies from "js-cookie";
 import { Link, useNavigate } from "react-router-dom";
 import userContext from "../services/userContext";
+import { toast } from "react-toastify";
 
 const problemsName = [
   "Weird Algorithm",
@@ -36,7 +37,7 @@ const problemsName = [
 const jwtToken = Cookies.get("uid");
 const Home = () => {
   const { userProblemSet, setUserProblem } = useContext(userContext);
-  console.log(userProblemSet);
+
   useEffect(() => {
     const getAllProblems = async () => {
       const res = await fetch("http://localhost:8000/api/v1/problem", {
@@ -47,9 +48,13 @@ const Home = () => {
         },
       });
       const data = await res.json();
-      console.log(data.payload);
-      // setProblem(data.payload);
-      setUserProblem(data.payload);
+      if(data?.status==='error'){
+          toast.error(data?.msg)
+      }
+      else{
+       
+        setUserProblem(data.payload);
+      }
     };
     getAllProblems();
   }, []);

@@ -6,7 +6,7 @@ function extractTextFromHTML(input) {
       const extractedText = matches
         .map((match) => match.replace(/<[^>]+>/g, '').trim())
         .join('\n');
-        console.log(extractedText);
+      
       return extractedText;
     }
   

@@ -5,7 +5,7 @@ function authenticate(req,res,next){
 const token =req.headers['x-access-token'];
 if(!token)return res.status('400').json({
     status:'error',
-    msg:'user not loggedin',
+    msg:'Please Log in or refresh',
 });
 try {
 const user =jwt.verify(token,JWT_SECRET_KEY);
@@ -15,7 +15,7 @@ req.user=username;
 } catch (error) {
     return res.status(400).json({
         status:'error',
-        msg:'user not loggedin',
+        msg:'Please Log in or refresh',
     });
 }
 next();

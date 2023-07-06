@@ -19,7 +19,7 @@ const Header = () => {
         const user = jwtDecode(jwtToken);
         setUserName(user?.username);
       } catch (error) {
-        console.log(error);
+        
       }
     }
   }

@@ -11,7 +11,7 @@ const Problem = () => {
   const [problem,setProblem]=useState([]);
   const [code,setCode]=useState('');
   const [input,setInput]=useState('');
-  const [output,setOutput]=useState('Your output will be displayed here');
+  const [output,setOutput]=useState('Your output will be displayed here ');
   const { id } = useParams();
   useEffect(()=>{
     const getProblemById = async () => {
@@ -28,11 +28,22 @@ const Problem = () => {
     getProblemById();
   },[])
   
-  const handleProblemSubmit = ()=>{
-    console.log(code,input);
+  const handleProblemSubmit = async ()=>{
+    setOutput('Program running');
+    const body ={code,input};
+    const res= await fetch(`http://localhost:8000/api/v1/problem/${id}`, {
+      method: 'POST',
+      headers: {
+        "Content-Type": "application/json",
+        "x-access-token": jwtToken,
+      },
+      body: JSON.stringify(body),
+    });
+    const data = await res.json();
+    setOutput(data);
   }
   return (
-    <div className="flex flex-row h-[33rem] border border-black">
+    <div className="flex flex-row h-[33.5rem] ">
       <div className="basis-3/5 px-1 flex flex-col border-r overflow-auto   border-r-black py-5">
         {problem?.map((problem, ind) =>
           problem.questionId === id ? (
@@ -61,6 +72,7 @@ const Problem = () => {
             <textarea
               className="w-full h-full border bg-gray-50  border-l-slate-100 outline-none resize-none"
               placeholder="Enter your cpp code here"
+              spellCheck="false"
               value={code}
               onChange={(e)=>setCode(e.target.value)}
             ></textarea>
@@ -90,8 +102,8 @@ const Problem = () => {
               </div>
               <div className="basis-4/5 border-b-2 border-b-[#906f3f] border-l-2 border-l-[#906f3f]"></div>
             </div>
-            <div className="flex flex-col px-4 py-2 h-full overflow-auto">
-            {output}
+            <div className="flex flex-col px-4 pt-1  overflow-auto">
+              {typeof output === 'object' && output !== null?<><div className="flex flex-col h-[8rem] overflow-auto"><div className="font-bold">Status:{output?.status}</div><div>{output?.msg}</div><div className="font-mono ">{output?.output}</div> </div></>:<div className="font-mono text-lg font-semibold h-[8rem] overflow-auto">{output}</div>}
             </div>
           </div>
         </div>
