@@ -27,7 +27,7 @@ const Header = () => {
   return (
     <div className="flex flex-row justify-between px-3 py-2 bg-[#292929] ">
       <Link to="/">
-        <div>
+        <div className="flex">
           <span
             className="font-logo font-bold text-3xl"
             style={{
@@ -47,11 +47,14 @@ const Header = () => {
             {" "}
             MAZE
           </span>
+         
         </div>
+        
       </Link>
       <div className="flex flex-row gap-4 items-center ">
         {userName != "" ? (
           <>
+            <div className="text-white font-sans cursor-pointer"><Link to='/' className=" text-[#906f3f] ">Problem Set</Link></div>
             <div className="text-white font-sans cursor-pointer"><Link to='/add-problem' className="border-b border-b-white ">Add a problem</Link></div>
             <div className="text-white font-sans">{userName}</div>
             <div className="font-sans text-white bg-[#906f3f] px-2 h-7 rounded cursor-pointer" onClick={handleUserlogout}>

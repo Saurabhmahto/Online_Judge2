@@ -1,4 +1,5 @@
-const JWT_SECRET_KEY='$#saurabhmahto28102002';
+// const JWT_SECRET_KEY='$#saurabhmahto28102002';
+const {JWT_SECRET_KEY} =require('../connect')
 const jwt =require('jsonwebtoken');
 
 function authenticate(req,res,next){

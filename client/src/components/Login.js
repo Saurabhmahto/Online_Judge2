@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import Cookies from 'js-cookie';
 import userContext from "../services/userContext";
 import jwtDecode from 'jwt-decode';
+import { SERVER_URL} from '../../config';
 
 
 const Login = () => {
@@ -17,7 +18,7 @@ const Login = () => {
     username,
     password
    };
-   const res= await fetch('http://localhost:8000/api/v1/user/login', {
+   const res= await fetch(`${SERVER_URL}/api/v1/user/login`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

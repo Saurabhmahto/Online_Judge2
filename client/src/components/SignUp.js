@@ -1,6 +1,7 @@
 import React,{useState} from "react";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import { SERVER_URL} from '../../config.js';
 
 
 const SignUp = () => {
@@ -14,7 +15,8 @@ const SignUp = () => {
       email:emailId,
       password,
     }
-    const res= await fetch('http://localhost:8000/api/v1/user/signup', {
+    console.log(SERVER_URL,user);
+    const res= await fetch(`${SERVER_URL}/api/v1/user/signup`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

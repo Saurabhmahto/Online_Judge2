@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Cookies from "js-cookie";
 import { toast } from "react-toastify";
+import { SERVER_URL} from '../../config';
 
 
 
@@ -11,7 +12,7 @@ const task = () => {
     const name ={
       name:problemName.toLowerCase().replace(/\s/g, '-')
     };
-    const res =await fetch('http://localhost:8000/api/v1/problem', {
+    const res =await fetch(`${SERVER_URL}/api/v1/problem`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

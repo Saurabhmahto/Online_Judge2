@@ -1,8 +1,7 @@
 const User = require("../models/user");
 const { LeetCode } = require("leetcode-query");
 const leetcode = new LeetCode();
-// const { generateFile } = require("../services/generatefile");
-// const { executeCpp } = require("../services/executeCpp");
+
 const { exec, spawn, execFileSync } = require("child_process");
 const fs = require("fs");
 

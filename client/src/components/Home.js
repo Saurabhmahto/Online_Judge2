@@ -5,42 +5,15 @@ import Cookies from "js-cookie";
 import { Link, useNavigate } from "react-router-dom";
 import userContext from "../services/userContext";
 import { toast } from "react-toastify";
+import { SERVER_URL} from '../../config';
 
-const problemsName = [
-  "Weird Algorithm",
-  "Missing Number",
-  "Repetitions",
-  "Increasing Array",
-  "Permutations",
-  "Number Spiral",
-  "Two Knights",
-  "Two Sets",
-  "Bit Strings",
-  "Trailing Zeros",
-  "Coin Piles",
-  "Palindrome Reorder",
-  "Gray Code",
-  "Weird Algorithm",
-  "Missing Number",
-  "Repetitions",
-  "Increasing Array",
-  "Permutations",
-  "Number Spiral",
-  "Two Knights",
-  "Two Sets",
-  "Bit Strings",
-  "Trailing Zeros",
-  "Coin Piles",
-  "Palindrome Reorder",
-  "Gray Code",
-];
 const jwtToken = Cookies.get("uid");
 const Home = () => {
   const { userProblemSet, setUserProblem } = useContext(userContext);
 
   useEffect(() => {
     const getAllProblems = async () => {
-      const res = await fetch("http://localhost:8000/api/v1/problem", {
+      const res = await fetch(`${SERVER_URL}/api/v1/problem`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",

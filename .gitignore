@@ -6,3 +6,5 @@ client/dist
 server/node_modules
 server/codes
 server/outputs
+server/services
+server/.env

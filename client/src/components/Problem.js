@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import userContext from "../services/userContext";
 import Cookies from "js-cookie";
+import { SERVER_URL} from '../../config';
 
 const jwtToken = Cookies.get("uid");
 
@@ -15,7 +16,7 @@ const Problem = () => {
   const { id } = useParams();
   useEffect(()=>{
     const getProblemById = async () => {
-      const res = await fetch(`http://localhost:8000/api/v1/problem/${id}`, {
+      const res = await fetch(`${SERVER_URL}/api/v1/problem/${id}`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -31,7 +32,7 @@ const Problem = () => {
   const handleProblemSubmit = async ()=>{
     setOutput('Program running');
     const body ={code,input};
-    const res= await fetch(`http://localhost:8000/api/v1/problem/${id}`, {
+    const res= await fetch(`${SERVER_URL}/api/v1/problem/${id}`, {
       method: 'POST',
       headers: {
         "Content-Type": "application/json",
@@ -103,7 +104,7 @@ const Problem = () => {
               <div className="basis-4/5 border-b-2 border-b-[#906f3f] border-l-2 border-l-[#906f3f]"></div>
             </div>
             <div className="flex flex-col px-4 pt-1  overflow-auto">
-              {typeof output === 'object' && output !== null?<><div className="flex flex-col h-[8rem] overflow-auto"><div className="font-bold">Status:{output?.status}</div><div>{output?.msg}</div><div className="font-mono ">{output?.output}</div> </div></>:<div className="font-mono text-lg font-semibold h-[8rem] overflow-auto">{output}</div>}
+              {typeof output === 'object' && output !== null?<><div className="flex flex-col h-[8rem] overflow-auto"><div className="font-bold">Status:{output?.status}</div><div className="font-medium">{output?.msg}</div><div className="font-mono ">{output?.output}</div> </div></>:<div className="font-mono text-lg font-semibold h-[8rem] overflow-auto">{output}</div>}
             </div>
           </div>
         </div>
