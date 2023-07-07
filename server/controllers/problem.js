@@ -64,7 +64,7 @@ async function getAllProblems(req, res) {
   const userData = await User.findOne({ username: user });
   res.status(200).json({
     status: "ok",
-    payload: userData.problems,
+    payload: userData?.problems,
   });
 }
 
